@@ -19,9 +19,9 @@ jobs:
 
       - name: Auto Update Log & Commit
         run: |
-          # 1. Đặt thông tin commit (Thay bằng username & email GitHub của bạn để xanh profile)
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          # 1. Đặt thông tin commit chính xác tài khoản GitHub của bạn
+          git config --global user.name "tuananhdangquang869-cloud"
+          git config --global user.email "tuananhdangquang869@gmail.com"
           
           # 2. Ghi thời gian hiện tại vào file nhật ký
           mkdir -p .github
