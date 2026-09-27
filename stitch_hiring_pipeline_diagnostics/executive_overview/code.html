@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Áp Lực Kế - Executive Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-background": "#dae2fd",
+                        "surface-bright": "#31394d",
+                        "tertiary-container": "#07c7b2",
+                        "on-tertiary-fixed": "#00201c",
+                        "secondary-container": "#ee9800",
+                        "on-surface-variant": "#bdc8d1",
+                        "surface-container-high": "#222a3d",
+                        "on-secondary": "#472a00",
+                        "on-tertiary-container": "#004d44",
+                        "on-primary-fixed": "#001e2c",
+                        "surface-container": "#171f33",
+                        "primary-container": "#38bdf8",
+                        "inverse-surface": "#dae2fd",
+                        "on-surface": "#dae2fd",
+                        "surface-tint": "#7bd0ff",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-dim": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-fixed-variant": "#005047",
+                        "inverse-primary": "#00668a",
+                        "on-primary-fixed-variant": "#004c69",
+                        "secondary": "#ffb95f",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#003731",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-container-highest": "#2d3449",
+                        "error": "#ffb4ab",
+                        "tertiary": "#45e3ce",
+                        "surface": "#0b1326",
+                        "outline-variant": "#3e484f",
+                        "tertiary-fixed-dim": "#3cddc7",
+                        "surface-container-lowest": "#060e20",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "on-primary": "#00354a",
+                        "primary-fixed": "#c4e7ff",
+                        "background": "#0b1326",
+                        "on-secondary-container": "#5b3800",
+                        "outline": "#87929a",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#004965",
+                        "primary": "#8ed5ff",
+                        "tertiary-fixed": "#62fae3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "cell-padding": "8px 12px"
+                    },
+                    "fontFamily": {
+                        "data-label": ["JetBrains Mono"],
+                        "data-display": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "caption": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-label": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "data-display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .vitals-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(7, 199, 178, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(7, 199, 178, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(7, 199, 178, 0); }
+        }
+        
+        .leak-line {
+            background: linear-gradient(90deg, transparent, #ee9800);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen antialiased selection:bg-primary-container selection:text-on-primary-container flex">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface font-body-md text-body-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant hidden md:flex flex-col h-full py-margin px-gutter z-50">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary-container font-bold">AK</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary leading-none">Áp Lực Kế</h1>
+<p class="font-caption text-caption text-on-surface-variant">Recruitment Analytics</p>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT bg-primary-container text-on-primary-container font-bold border-r-4 border-primary transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Executive Overview
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">filter_list</span>
+                Funnel Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">person_search</span>
+                Candidate Explorer
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">work</span>
+                Job Management
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-container font-data-label text-data-label fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline-variant flex justify-between items-center px-margin h-full z-40 hidden md:flex">
+<!-- Search Bar (on_left) -->
+<div class="flex items-center w-64 bg-surface-dim border border-outline-variant rounded-DEFAULT h-8 px-2 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] mr-2">search</span>
+<input class="bg-transparent border-none p-0 text-data-label w-full focus:ring-0 text-on-surface placeholder:text-on-surface-variant" placeholder="Search ID or Metric..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<!-- Trailing Primary Action -->
+<button class="bg-surface-variant hover:bg-surface-bright border border-outline-variant text-on-surface px-3 py-1 rounded-DEFAULT flex items-center gap-2 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                Last 30 Days
+            </button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4">
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform p-1">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform p-1 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-secondary-container"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform p-1">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 mt-0 md:mt-16 p-margin overflow-y-auto bg-background">
+<!-- Top KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<!-- Metric 1 -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-DEFAULT flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Applicants</span>
+<span class="material-symbols-outlined text-tertiary-container text-[16px]">trending_up</span>
+</div>
+<div class="font-data-display text-data-display text-on-surface">2.4k</div>
+<div class="font-data-label text-data-label text-tertiary mt-1">+12% vs last month</div>
+</div>
+<!-- Metric 2 (Warning) -->
+<div class="bg-surface-container border border-error-container p-4 rounded-DEFAULT flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 w-8 h-8 bg-error-container/20 rounded-bl-full border-b border-l border-error-container/30"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<span class="font-caption text-caption text-error uppercase tracking-wider">Time-to-Hire</span>
+<div class="w-2 h-2 rounded-full bg-error vitals-pulse mt-1"></div>
+</div>
+<div class="font-data-display text-data-display text-error relative z-10">42 <span class="text-body-md font-body-md text-on-error-container">days</span></div>
+<div class="font-data-label text-data-label text-error mt-1 relative z-10">+4 days vs target</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-DEFAULT flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Acceptance Rate</span>
+<span class="material-symbols-outlined text-outline text-[16px]">horizontal_rule</span>
+</div>
+<div class="font-data-display text-data-display text-on-surface">68%</div>
+<div class="font-data-label text-data-label text-on-surface-variant mt-1">Steady</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-DEFAULT flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Open Positions</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]">work_outline</span>
+</div>
+<div class="font-data-display text-data-display text-on-surface">14</div>
+<div class="font-data-label text-data-label text-primary-container mt-1">Across 3 depts</div>
+</div>
+</div>
+<!-- Bento Grid Main Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Dial / Gauge -->
+<div class="lg:col-span-4 bg-surface-container border border-outline-variant rounded-DEFAULT p-6 flex flex-col items-center justify-center relative">
+<h2 class="font-headline-md text-headline-md text-on-surface self-start w-full mb-6">Pipeline Health</h2>
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- SVG Gauge Background -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#2d3449" stroke-dasharray="283" stroke-dashoffset="0" stroke-width="8"></circle>
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="45" stroke="#07c7b2" stroke-dasharray="283" stroke-dashoffset="74" stroke-width="8"></circle>
+</svg>
+<div class="text-center flex flex-col items-center">
+<span class="font-data-display text-[48px] leading-[48px] font-bold text-on-surface">74</span>
+<span class="font-data-label text-data-label text-on-surface-variant">/ 100</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between w-full px-4 border-t border-outline-variant pt-4">
+<div class="text-center">
+<div class="font-caption text-caption text-on-surface-variant uppercase">Quality</div>
+<div class="font-data-label text-data-label text-tertiary-container mt-1">High</div>
+</div>
+<div class="text-center">
+<div class="font-caption text-caption text-on-surface-variant uppercase">Velocity</div>
+<div class="font-data-label text-data-label text-secondary-container mt-1">Avg</div>
+</div>
+</div>
+</div>
+<!-- Condensed Funnel -->
+<div class="lg:col-span-8 bg-surface-container border border-outline-variant rounded-DEFAULT p-6 flex flex-col">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Current Funnel Summary</h2>
+<div class="flex-1 flex flex-col justify-center space-y-2">
+<!-- Sourced -->
+<div class="relative flex items-center h-12">
+<div class="w-full bg-primary/20 border border-primary/40 rounded-DEFAULT h-full flex justify-between items-center px-4 z-10">
+<span class="font-data-label text-data-label text-on-surface">Sourced</span>
+<span class="font-data-label text-data-label text-primary">2,400</span>
+</div>
+</div>
+<!-- Screened -->
+<div class="relative flex items-center h-12 ml-4">
+<div class="w-[calc(100%-1rem)] bg-primary/30 border border-primary/50 rounded-DEFAULT h-full flex justify-between items-center px-4 z-10">
+<span class="font-data-label text-data-label text-on-surface">Screened</span>
+<span class="font-data-label text-data-label text-primary">850</span>
+</div>
+<!-- Leak -->
+<div class="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 flex items-center">
+<div class="h-[2px] w-8 leak-line"></div>
+<span class="font-caption text-caption text-secondary-container ml-1">64% drop</span>
+</div>
+</div>
+<!-- Interviewed -->
+<div class="relative flex items-center h-12 ml-8">
+<div class="w-[calc(100%-2rem)] bg-primary/40 border border-primary/60 rounded-DEFAULT h-full flex justify-between items-center px-4 z-10">
+<span class="font-data-label text-data-label text-on-surface">Interviewed</span>
+<span class="font-data-label text-data-label text-primary">210</span>
+</div>
+</div>
+<!-- Offered -->
+<div class="relative flex items-center h-12 ml-12">
+<div class="w-[calc(100%-3rem)] bg-primary/50 border border-primary/70 rounded-DEFAULT h-full flex justify-between items-center px-4 z-10">
+<span class="font-data-label text-data-label text-on-surface">Offered</span>
+<span class="font-data-label text-data-label text-primary">45</span>
+</div>
+</div>
+<!-- Hired -->
+<div class="relative flex items-center h-12 ml-16">
+<div class="w-[calc(100%-4rem)] bg-primary/60 border border-primary rounded-DEFAULT h-full flex justify-between items-center px-4 z-10">
+<span class="font-data-label text-data-label font-bold text-on-surface">Hired</span>
+<span class="font-data-label text-data-label font-bold text-primary-fixed">32</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Critical Leaks Table -->
+<div class="lg:col-span-12 bg-surface-container border border-outline-variant rounded-DEFAULT overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">warning</span>
+                        Critical Leaks
+                    </h2>
+<span class="font-caption text-caption text-on-surface-variant bg-surface-dim px-2 py-1 rounded border border-outline-variant">Top 3 by Drop-off</span>
+</div>
+<table class="w-full text-left font-data-label text-data-label border-collapse">
+<thead>
+<tr class="bg-surface-dim border-b border-outline-variant text-on-surface-variant uppercase font-caption text-caption">
+<th class="p-cell-padding font-medium">Job Title</th>
+<th class="p-cell-padding font-medium">Critical Stage</th>
+<th class="p-cell-padding font-medium text-right">Drop-off Rate</th>
+<th class="p-cell-padding font-medium text-right">Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant bg-surface-container hover:bg-surface-variant/50 transition-colors">
+<td class="p-cell-padding text-on-surface font-bold border-l-2 border-secondary-container">Software Engineer</td>
+<td class="p-cell-padding text-on-surface-variant">Technical Screen</td>
+<td class="p-cell-padding text-right text-secondary-container font-bold">45%</td>
+<td class="p-cell-padding text-right text-on-surface-variant">High</td>
+</tr>
+<tr class="border-b border-outline-variant bg-surface-container hover:bg-surface-variant/50 transition-colors">
+<td class="p-cell-padding text-on-surface font-bold border-l-2 border-secondary-container">Product Manager</td>
+<td class="p-cell-padding text-on-surface-variant">Case Study Presentation</td>
+<td class="p-cell-padding text-right text-secondary-container font-bold">38%</td>
+<td class="p-cell-padding text-right text-on-surface-variant">Medium</td>
+</tr>
+<tr class="bg-surface-container hover:bg-surface-variant/50 transition-colors">
+<td class="p-cell-padding text-on-surface font-bold border-l-2 border-outline">Marketing Specialist</td>
+<td class="p-cell-padding text-on-surface-variant">Initial Recruiter Screen</td>
+<td class="p-cell-padding text-right text-on-surface-variant font-bold">22%</td>
+<td class="p-cell-padding text-right text-on-surface-variant">Low</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

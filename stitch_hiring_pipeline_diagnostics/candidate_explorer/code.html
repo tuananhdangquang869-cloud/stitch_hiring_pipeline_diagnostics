@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Candidate Explorer - Áp Lực Kế</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-background": "#dae2fd",
+                      "surface-bright": "#31394d",
+                      "tertiary-container": "#07c7b2",
+                      "on-tertiary-fixed": "#00201c",
+                      "secondary-container": "#ee9800",
+                      "on-surface-variant": "#bdc8d1",
+                      "surface-container-high": "#222a3d",
+                      "on-secondary": "#472a00",
+                      "on-tertiary-container": "#004d44",
+                      "on-primary-fixed": "#001e2c",
+                      "surface-container": "#171f33",
+                      "primary-container": "#38bdf8",
+                      "inverse-surface": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "surface-tint": "#7bd0ff",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "surface-dim": "#0b1326",
+                      "surface-container-low": "#131b2e",
+                      "secondary-fixed": "#ffddb8",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "inverse-primary": "#00668a",
+                      "on-primary-fixed-variant": "#004c69",
+                      "secondary": "#ffb95f",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#003731",
+                      "surface-variant": "#2d3449",
+                      "on-secondary-fixed": "#2a1700",
+                      "surface-container-highest": "#2d3449",
+                      "error": "#ffb4ab",
+                      "tertiary": "#45e3ce",
+                      "surface": "#0b1326",
+                      "outline-variant": "#3e484f",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "surface-container-lowest": "#060e20",
+                      "primary-fixed-dim": "#7bd0ff",
+                      "on-primary": "#00354a",
+                      "primary-fixed": "#c4e7ff",
+                      "background": "#0b1326",
+                      "on-secondary-container": "#5b3800",
+                      "outline": "#87929a",
+                      "inverse-on-surface": "#283044",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#004965",
+                      "primary": "#8ed5ff",
+                      "tertiary-fixed": "#62fae3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin": "24px",
+                      "gutter": "16px",
+                      "base": "4px",
+                      "cell-padding": "8px 12px"
+              },
+              "fontFamily": {
+                      "data-label": [
+                              "JetBrains Mono"
+                      ],
+                      "data-display": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "data-label": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-display": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "caption": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+<style>
+        /* Custom scrollbar for dense data tables */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e484f; 
+        }
+        
+        /* Utility for 1px inset mimicking recessed hardware */
+        .recessed-input {
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-screen w-screen overflow-hidden flex selection:bg-primary selection:text-on-primary">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant flex flex-col py-margin px-gutter z-50">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary leading-tight">Áp Lực Kế</h1>
+<p class="font-caption text-caption text-on-surface-variant">Recruitment Analytics</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Executive Overview
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined">filter_list</span>
+                Funnel Analytics
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary-container text-on-primary-container font-bold border-r-4 border-primary font-data-label text-data-label shadow-[0_0_10px_rgba(56,189,248,0.2)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_search</span>
+                Candidate Explorer
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined">work</span>
+                Job Management
+            </a>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors duration-150 ease-in-out font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-64 relative h-full">
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-container fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline-variant flex justify-between items-center px-margin z-40">
+<!-- Search / Context -->
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-dim border border-outline-variant rounded pl-9 pr-3 py-1.5 font-data-label text-data-label text-on-surface focus:outline-none focus:border-primary recessed-input placeholder:text-on-surface-variant/50" placeholder="QUERY CANDIDATE_ID..." type="text"/>
+</div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<span class="font-data-label text-data-label text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                    SYS_STATUS: OPTIMAL
+                </span>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border border-surface-container"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<button class="bg-surface-variant border border-outline-variant px-3 py-1.5 rounded font-data-label text-data-label text-on-surface hover:border-primary transition-colors flex items-center gap-2">
+                    Last 30 Days
+                    <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 mt-16 p-margin overflow-hidden flex flex-col gap-gutter">
+<!-- Controls Row -->
+<div class="flex justify-between items-end">
+<div class="flex gap-2 bg-surface-container p-1 rounded border border-outline-variant">
+<button class="px-4 py-1.5 rounded bg-surface-variant text-on-surface font-data-label text-data-label border border-outline-variant shadow-sm">All Stages</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-data-label text-data-label transition-colors">Screening</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-data-label text-data-label transition-colors">Technical</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-data-label text-data-label transition-colors">Offer</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-data-label text-data-label text-on-surface-variant">SORT BY:</span>
+<select class="bg-surface-dim border border-outline-variant rounded px-3 py-1.5 font-data-label text-data-label text-on-surface focus:outline-none focus:border-primary recessed-input appearance-none pr-8 relative">
+<option>Health Score (Asc)</option>
+<option>Time in Stage (Desc)</option>
+</select>
+</div>
+</div>
+<!-- Dense Data Table -->
+<div class="flex-1 bg-surface border border-outline-variant rounded overflow-hidden flex flex-col relative">
+<!-- Table Header -->
+<div class="grid grid-cols-[2fr_1.5fr_1fr_1.5fr_1fr_100px] gap-2 border-b border-outline-variant bg-surface-container-low px-4 py-2 sticky top-0 z-10">
+<div class="font-data-label text-data-label text-on-surface-variant">CANDIDATE_ID / NAME</div>
+<div class="font-data-label text-data-label text-on-surface-variant">CURRENT_STAGE</div>
+<div class="font-data-label text-data-label text-on-surface-variant">TIME_IN_STAGE</div>
+<div class="font-data-label text-data-label text-on-surface-variant">HEALTH_INDEX</div>
+<div class="font-data-label text-data-label text-on-surface-variant">ASSIGNED</div>
+<div class="font-data-label text-data-label text-on-surface-variant text-right">ACTION</div>
+</div>
+<!-- Table Body (Scrollable) -->
+<div class="overflow-y-auto flex-1">
+<!-- Row 1: Healthy -->
+<div class="grid grid-cols-[2fr_1.5fr_1fr_1.5fr_1fr_100px] gap-2 border-b border-outline-variant px-4 py-3 items-center hover:bg-surface-variant/30 transition-colors group">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small, professional headshot photo of a young male software engineer in a well-lit office setting. Neutral background. High resolution, stark contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzEZ1JmDKqNBj42cGt02zMH8XCMg8OVVD_IqmNsK8dyqrQQ9U02L81M1UOvtu43nAuCItjySPxJhLAp7ynIYGsl-aSzooh5ZODUkc5auAD85CZjkrjF4TsPKRLtX6qcTMaeBP3SAb1EJhiMkw4jz89H2d7DJjymSWMdmZ0tXEwHlSB23cd_t1CbsRnp3YqpIbS90M04kCF7TCkNa9ezEgjca2AbgG4OqzYH8-kN-tZWPGXVQW_-h5d"/>
+<div class="flex flex-col">
+<span class="font-data-label text-data-label text-on-surface font-bold">JD-8932</span>
+<span class="font-caption text-caption text-on-surface-variant">John Doe</span>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded border border-outline-variant bg-surface-dim font-data-label text-data-label text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-2"></span>
+                                Technical Interview
+                            </span>
+</div>
+<div class="font-data-label text-data-label text-on-surface">02 Days</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-dim border border-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[92%]"></div>
+</div>
+<span class="font-data-label text-data-label text-tertiary">92</span>
+</div>
+<div class="font-data-label text-data-label text-on-surface-variant">S. Miller</div>
+<div class="text-right">
+<button class="px-3 py-1 rounded bg-surface-container border border-outline-variant text-on-surface font-data-label text-data-label hover:border-primary hover:text-primary transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" onclick="toggleDiagnostic()">Diagnose</button>
+</div>
+</div>
+<!-- Row 2: Warning (Amber) -->
+<div class="grid grid-cols-[2fr_1.5fr_1fr_1.5fr_1fr_100px] gap-2 border-b border-outline-variant px-4 py-3 items-center hover:bg-surface-variant/30 transition-colors bg-secondary-container/5 group">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small, professional headshot photo of a female product manager. Warm lighting, modern corporate environment. High resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM7u6AuXkmH9l5gQBeFCW61-StGhDcQ2lC1KMDOJsSCs8_YDNbfEt-6_pKimxJjJ9xaVf2fwM-vXHIrTr7brE7sjmoh8w3V_qAig5hpKRoEMgHSifrn8PW3HXzn3TfJ1acwcRAeLcPNZZVSu_O1Fn2fuboN108m-vQkJ1iMrxDguE9IUyKcRL3SEVvrOUkuOyOh8gUiWRwX583oUkzuBAmlgXd9ccKW-8TT4aUfGElMoEperrqVFuh"/>
+<div class="flex flex-col">
+<span class="font-data-label text-data-label text-on-surface font-bold">AS-4419</span>
+<span class="font-caption text-caption text-on-surface-variant">Alice Smith</span>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded border border-outline-variant bg-surface-dim font-data-label text-data-label text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-2"></span>
+                                Take-home Assignment
+                            </span>
+</div>
+<div class="font-data-label text-data-label text-secondary flex items-center gap-1">
+                            09 Days
+                            <span class="material-symbols-outlined text-[14px]">warning</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-dim border border-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%]"></div>
+</div>
+<span class="font-data-label text-data-label text-secondary">65</span>
+</div>
+<div class="font-data-label text-data-label text-on-surface-variant">R. Chen</div>
+<div class="text-right">
+<button class="px-3 py-1 rounded bg-surface-container border border-outline-variant text-on-surface font-data-label text-data-label hover:border-primary hover:text-primary transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" onclick="toggleDiagnostic()">Diagnose</button>
+</div>
+</div>
+<!-- Row 3: Critical (Error) -->
+<div class="grid grid-cols-[2fr_1.5fr_1fr_1.5fr_1fr_100px] gap-2 border-b border-outline-variant px-4 py-3 items-center hover:bg-surface-variant/30 transition-colors bg-error-container/10 group border-l-2 border-l-error">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-error object-cover" data-alt="A small, professional headshot photo of an older male executive. Serious expression, dark background. High contrast, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkJerI9TPoQvJIaypDWV4wpSrSocVyUlk8BhH6AVeAKQR4GziyY2AqQDrhUCsVpzapoG6ECQnklF8yqoCdVhVSb4UO6XMqCgdmtzI1Bq-jb_tOfDzqPcY0UD45HUg-5ZVL6o5bwTXuROMTVCL4WmUi294Lc1h04n--TWGVIxO9thBPkiRKhR6sDNCSp4efayH466f6FesDNmgEa63zQWYQmPZpvGfxqhOtX48S3rXNinGFzX1iTIci"/>
+<div class="flex flex-col">
+<span class="font-data-label text-data-label text-on-surface font-bold">BW-1022</span>
+<span class="font-caption text-caption text-on-surface-variant">Bob Wilson</span>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded border border-outline-variant bg-surface-dim font-data-label text-data-label text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-2 animate-pulse"></span>
+                                Final Interview
+                            </span>
+</div>
+<div class="font-data-label text-data-label text-error font-bold flex items-center gap-1">
+                            18 Days
+                            <span class="material-symbols-outlined text-[14px]">error</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-dim border border-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-error w-[28%]"></div>
+</div>
+<span class="font-data-label text-data-label text-error">28</span>
+</div>
+<div class="font-data-label text-data-label text-on-surface-variant">L. Davis</div>
+<div class="text-right">
+<button class="px-3 py-1 rounded bg-surface-container border border-primary text-primary font-data-label text-data-label hover:bg-primary/10 transition-colors shadow-[0_0_8px_rgba(56,189,248,0.3)]" onclick="toggleDiagnostic()">Diagnose</button>
+</div>
+</div>
+<!-- Row 4: Healthy -->
+<div class="grid grid-cols-[2fr_1.5fr_1fr_1.5fr_1fr_100px] gap-2 border-b border-outline-variant px-4 py-3 items-center hover:bg-surface-variant/30 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full border border-outline-variant bg-surface-variant flex items-center justify-center font-data-label text-data-label text-on-surface">EM</div>
+<div class="flex flex-col">
+<span class="font-data-label text-data-label text-on-surface font-bold">EM-7741</span>
+<span class="font-caption text-caption text-on-surface-variant">Elena Martinez</span>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded border border-outline-variant bg-surface-dim font-data-label text-data-label text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-2"></span>
+                                Offer Extended
+                            </span>
+</div>
+<div class="font-data-label text-data-label text-on-surface">01 Days</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-dim border border-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[98%]"></div>
+</div>
+<span class="font-data-label text-data-label text-tertiary">98</span>
+</div>
+<div class="font-data-label text-data-label text-on-surface-variant">S. Miller</div>
+<div class="text-right">
+<button class="px-3 py-1 rounded bg-surface-container border border-outline-variant text-on-surface font-data-label text-data-label hover:border-primary hover:text-primary transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" onclick="toggleDiagnostic()">Diagnose</button>
+</div>
+</div>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="border-t border-outline-variant bg-surface-container-low px-4 py-2 flex justify-between items-center z-10">
+<span class="font-data-label text-data-label text-on-surface-variant">Showing 1-4 of 142 Records</span>
+<div class="flex gap-1">
+<button class="w-6 h-6 rounded bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">chevron_left</span></button>
+<button class="w-6 h-6 rounded bg-primary-container border border-primary flex items-center justify-center text-on-primary-container font-data-label text-data-label">1</button>
+<button class="w-6 h-6 rounded bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface font-data-label text-data-label hover:bg-surface-container">2</button>
+<button class="w-6 h-6 rounded bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface font-data-label text-data-label hover:bg-surface-container">3</button>
+<button class="w-6 h-6 rounded bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Diagnostic Sidebar (Offcanvas) -->
+<aside class="fixed top-16 right-0 h-[calc(100vh-4rem)] w-[400px] bg-surface-container border-l border-outline-variant z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col shadow-2xl" id="diagnostic-sidebar">
+<!-- Sidebar Header -->
+<div class="p-4 border-b border-outline-variant flex justify-between items-start bg-surface-container-high">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-error text-[18px]">troubleshoot</span>
+<span class="font-data-label text-data-label text-on-surface-variant tracking-wider">DIAGNOSTIC VIEW</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">BW-1022 <span class="text-on-surface-variant font-normal">| Bob Wilson</span></h2>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant transition-colors" onclick="toggleDiagnostic()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Sidebar Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+<!-- Vitals Grid -->
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-dim border border-outline-variant rounded p-3 recessed-input">
+<div class="font-caption text-caption text-on-surface-variant mb-1">HEALTH_INDEX</div>
+<div class="font-data-display text-data-display text-error">28.4%</div>
+</div>
+<div class="bg-surface-dim border border-outline-variant rounded p-3 recessed-input">
+<div class="font-caption text-caption text-on-surface-variant mb-1">TOTAL_TIME</div>
+<div class="font-data-display text-data-display text-on-surface">42 Days</div>
+</div>
+</div>
+<!-- Risk Factors Alert -->
+<div class="bg-error-container/20 border border-error p-3 rounded flex gap-3 items-start">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<div>
+<h3 class="font-data-label text-data-label text-error font-bold mb-1">High Risk of Drop-off Detected</h3>
+<ul class="font-body-md text-body-md text-on-surface text-sm list-disc pl-4 space-y-1">
+<li>Stalled in Final Interview stage for &gt; 2.5x average duration.</li>
+<li>No communication logged in ATS for 12 days.</li>
+</ul>
+</div>
+</div>
+<!-- Funnel / Journey Timeline -->
+<div>
+<h3 class="font-data-label text-data-label text-on-surface-variant mb-4 border-b border-outline-variant pb-2">JOURNEY TIMELINE</h3>
+<div class="relative pl-6 space-y-6">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-px bg-outline-variant"></div>
+<!-- Step 1: Complete -->
+<div class="relative">
+<div class="absolute -left-[29px] top-0 w-4 h-4 rounded-full bg-surface-container border-2 border-tertiary flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-2">
+<div class="flex justify-between items-center mb-1">
+<span class="font-data-label text-data-label text-on-surface">Applied</span>
+<span class="font-caption text-caption text-on-surface-variant">Oct 12</span>
+</div>
+<div class="font-caption text-caption text-on-surface-variant">Source: Direct (Careers Page)</div>
+</div>
+</div>
+<!-- Step 2: Complete -->
+<div class="relative">
+<div class="absolute -left-[29px] top-0 w-4 h-4 rounded-full bg-surface-container border-2 border-tertiary flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-2">
+<div class="flex justify-between items-center mb-1">
+<span class="font-data-label text-data-label text-on-surface">Screening</span>
+<span class="font-caption text-caption text-on-surface-variant">Oct 15</span>
+</div>
+<div class="font-caption text-caption text-on-surface-variant">Duration: 3 Days (Optimal)</div>
+</div>
+</div>
+<!-- Step 3: Leakage Warning -->
+<div class="relative group">
+<div class="absolute -left-[29px] top-0 w-4 h-4 rounded-full bg-surface-container border-2 border-secondary flex items-center justify-center z-10">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+</div>
+<!-- Leakage indicator line -->
+<div class="absolute -left-[25px] top-2 w-8 h-px bg-secondary opacity-50 z-0"></div>
+<div class="bg-surface border border-secondary rounded p-2 relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary-container/5"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-1">
+<span class="font-data-label text-data-label text-secondary">Technical Assessment</span>
+<span class="font-caption text-caption text-secondary">Oct 26</span>
+</div>
+<div class="font-caption text-caption text-on-surface-variant">Duration: 11 Days (+4 Days Avg)</div>
+</div>
+</div>
+</div>
+<!-- Step 4: Current / Error -->
+<div class="relative">
+<div class="absolute -left-[29px] top-0 w-4 h-4 rounded-full bg-surface-container border-2 border-error flex items-center justify-center animate-pulse">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+</div>
+<div class="bg-surface border-2 border-error rounded p-2 shadow-[0_0_10px_rgba(255,180,171,0.1)] relative">
+<div class="flex justify-between items-center mb-1">
+<span class="font-data-label text-data-label text-on-surface font-bold">Final Interview</span>
+<span class="font-caption text-caption text-error">Current</span>
+</div>
+<div class="font-caption text-caption text-error font-bold">Stalled: 18 Days</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Footer Action -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-high">
+<button class="w-full bg-primary text-on-primary font-data-label text-data-label py-2 rounded shadow-[0_0_8px_rgba(142,213,255,0.4)] hover:bg-primary-fixed transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">send</span>
+                Trigger Automated Check-in
+            </button>
+</div>
+</aside>
+<script>
+        function toggleDiagnostic() {
+            const sidebar = document.getElementById('diagnostic-sidebar');
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                sidebar.classList.add('translate-x-0');
+            } else {
+                sidebar.classList.add('translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+            }
+        }
+    </script>
+</body></html>

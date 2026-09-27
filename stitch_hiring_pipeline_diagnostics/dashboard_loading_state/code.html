@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Loading State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#004965",
+                      "inverse-surface": "#dae2fd",
+                      "on-primary-fixed": "#001e2c",
+                      "surface-tint": "#7bd0ff",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "primary-fixed-dim": "#7bd0ff",
+                      "inverse-primary": "#00668a",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "on-secondary-container": "#5b3800",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-tertiary": "#003731",
+                      "tertiary": "#45e3ce",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#004c69",
+                      "tertiary-fixed": "#62fae3",
+                      "surface-container-highest": "#2d3449",
+                      "error-container": "#93000a",
+                      "on-tertiary-fixed": "#00201c",
+                      "primary": "#8ed5ff",
+                      "secondary": "#ffb95f",
+                      "on-error": "#690005",
+                      "on-secondary": "#472a00",
+                      "on-primary": "#00354a",
+                      "surface-dim": "#0b1326",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-container": "#004d44",
+                      "on-surface-variant": "#bdc8d1",
+                      "surface-bright": "#31394d",
+                      "background": "#0b1326",
+                      "primary-container": "#38bdf8",
+                      "primary-fixed": "#c4e7ff",
+                      "surface-container-low": "#131b2e",
+                      "surface-container": "#171f33",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "surface": "#0b1326",
+                      "inverse-on-surface": "#283044",
+                      "error": "#ffb4ab",
+                      "on-background": "#dae2fd",
+                      "outline": "#87929a",
+                      "on-surface": "#dae2fd",
+                      "surface-container-lowest": "#060e20",
+                      "secondary-fixed": "#ffddb8",
+                      "tertiary-container": "#07c7b2",
+                      "surface-variant": "#2d3449",
+                      "outline-variant": "#3e484f",
+                      "secondary-container": "#ee9800",
+                      "surface-container-high": "#222a3d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin": "24px",
+                      "base": "4px",
+                      "cell-padding": "8px 12px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "caption": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "data-label": ["JetBrains Mono"],
+                      "headline-lg": ["Inter"],
+                      "data-display": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "caption": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "data-display": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: #0b1326; color: #dae2fd; }
+        .diagnostic-border { border: 1px solid #3e484f; }
+        .inset-input { box-shadow: inset 0 1px 2px rgba(0,0,0,0.3); }
+        .vitals-pulse { animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+        @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.5; } 80%, 100% { opacity: 0; transform: scale(2); } }
+        .funnel-segment { transition: width 0.3s ease; }
+        /* Scrollbar styles for a technical look */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0b1326; }
+        ::-webkit-scrollbar-thumb { background: #3e484f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #87929a; }
+    </style>
+</head>
+<body class="font-body-md antialiased overflow-hidden flex h-screen w-full">
+<!-- LEFT SIDEBAR -->
+<aside class="w-64 bg-surface flex-shrink-0 flex flex-col h-full border-r border-outline-variant relative z-20">
+<!-- Brand Header -->
+<div class="h-16 px-margin flex items-center border-b border-outline-variant gap-3 shrink-0">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center overflow-hidden shrink-0">
+<img alt="Áp Lực Kế Logo" class="w-full h-full object-contain mix-blend-screen" data-alt="Abstract geometric logo resembling a measuring instrument, precision modernism style, electric blue lines on dark background" src="https://lh3.googleusercontent.com/aida/AEtjO1VH6-YVkDD5Xxt_LOUEWQfLWAtiLB3voefzlT9t-sik6ClESLd_NjxO-SuoADJJij45PQe2AZ2NPFg0p4hZLrpOh-R1yqKwI8nnl7mEzyz4q31nKQU6k4x2zSo7wZEL-Bh19rfGAJvEKMxy3LEDrd7O5lCIgYUj7qPmZbd_nb49Z-dMxPvhq7JVTLyj9O5wveF7bOnZ8r626LpDt7fcirB47Lm6Oam2g7uRLvookcczbHRvR9QO6WsS4Hg"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight leading-tight">Áp Lực Kế</h1>
+<p class="font-caption text-caption text-on-surface-variant uppercase">Recruitment Analytics</p>
+</div>
+</div>
+<!-- Global Navigation -->
+<nav class="px-gutter py-4 border-b border-outline-variant flex flex-col gap-1 shrink-0">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Executive Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary-container text-on-primary-container font-bold border-l-4 border-primary transition-colors duration-150 ease-in-out font-body-md text-body-md ml-[-16px] pl-[15px]" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">filter_list</span>
+<span>Funnel Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">person_search</span>
+<span>Candidate Explorer</span>
+</a>
+</nav>
+<!-- Job Context List -->
+<div class="flex-1 overflow-y-auto px-gutter py-4 flex flex-col gap-2 relative"><div class="sticky top-0 bg-surface pb-2 z-10"><div class="relative"><span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span><div class="w-full bg-surface-container h-10 rounded border border-outline-variant"></div></div></div><div class="p-3 rounded border border-outline-variant bg-surface-container-lowest animate-pulse"><div class="h-4 bg-outline-variant/20 rounded w-3/4 mb-2"></div><div class="h-3 bg-outline-variant/10 rounded w-1/2"></div></div><div class="p-3 rounded border border-outline-variant bg-surface-container-lowest animate-pulse"><div class="h-4 bg-outline-variant/20 rounded w-2/3 mb-2"></div><div class="h-3 bg-outline-variant/10 rounded w-1/3"></div></div><div class="p-3 rounded border border-outline-variant bg-surface-container-lowest animate-pulse"><div class="h-4 bg-outline-variant/20 rounded w-4/5 mb-2"></div><div class="h-3 bg-outline-variant/10 rounded w-1/4"></div></div></div>
+<!-- Bottom Action -->
+<div class="p-margin border-t border-outline-variant bg-surface shrink-0">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container hover:bg-primary-fixed text-on-primary-container font-body-md text-body-md font-semibold py-2 rounded transition-colors shadow-[0_0_8px_rgba(56,189,248,0.2)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Requisition
+            </button>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA (Center & Right Panel) -->
+<main class="flex-1 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- TOP APP BAR -->
+<header class="h-16 bg-surface-container border-b border-outline-variant flex justify-between items-center px-margin shrink-0 relative z-10">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface flex items-center gap-3">
+                    Sr. Backend Engineer
+                    <span class="px-2 py-1 bg-surface-bright border border-outline-variant rounded font-caption text-caption text-tertiary-fixed-dim tracking-widest uppercase mt-1">REQ-142</span>
+</h2>
+</div>
+<div class="flex items-center gap-4">
+<!-- Date Selector (Segmented Control style) -->
+<div class="flex bg-surface-container-lowest rounded border border-outline-variant p-0.5">
+<button class="px-3 py-1 font-data-label text-data-label text-on-surface-variant hover:text-on-surface rounded-sm transition-colors">7D</button>
+<button class="px-3 py-1 font-data-label text-data-label bg-surface-variant text-primary shadow-sm rounded-sm transition-colors">30D</button>
+<button class="px-3 py-1 font-data-label text-data-label text-on-surface-variant hover:text-on-surface rounded-sm transition-colors">90D</button>
+<button class="px-3 py-1 font-data-label text-data-label text-on-surface-variant hover:text-on-surface rounded-sm transition-colors">YTD</button>
+</div>
+<div class="w-px h-6 bg-outline-variant"></div>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-secondary"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-bright border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Headshot of a professional user, neutral dark background, high contrast lighting, corporate technical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy2Gu3aA4NWtu0SekpLhuQxJYOp4jjZmy4yJiVlx-LBJbTYWUmHAP5aGULFrh1tYpsb971bs-SnK7JBisOdau5iLoi7qUsN5FVP_54eSXnCx4WHrDA4qvLNnZ0a09Kvhx6LWKY6hcAsn_zaLNroviYoFPUqtKw9T00MF4uau0X0fji-CMEX-FRBfcT8_L0jhYtv3OY1riuTx-fWbUEes01jAIPFyoCorhYnVVrCQRaX359c9h63DLi"/>
+</div>
+</div>
+</header>
+<!-- DASHBOARD CANVAS (Scrollable) -->
+<div class="flex-1 overflow-y-auto flex">
+<!-- CENTER VIEW: Funnel & KPIs -->
+<div class="flex-1 p-margin flex flex-col gap-margin max-w-[800px] mx-auto w-full">
+<!-- KPIs Row -->
+<div class="grid grid-cols-3 gap-4 shrink-0"><div class="bg-surface-container p-4 rounded diagnostic-border animate-pulse"><div class="h-3 bg-outline-variant/20 rounded w-1/2 mb-3"></div><div class="h-8 bg-outline-variant/30 rounded w-1/3 mb-2"></div><div class="h-3 bg-outline-variant/10 rounded w-2/3"></div></div><div class="bg-surface-container p-4 rounded diagnostic-border animate-pulse"><div class="h-3 bg-outline-variant/20 rounded w-1/2 mb-3"></div><div class="h-8 bg-outline-variant/30 rounded w-1/3 mb-2"></div><div class="h-1 bg-outline-variant/10 rounded w-full mt-2"></div></div><div class="bg-surface-container p-4 rounded diagnostic-border animate-pulse"><div class="h-3 bg-outline-variant/20 rounded w-1/2 mb-3"></div><div class="h-8 bg-outline-variant/30 rounded w-2/3 mb-2"></div><div class="h-3 bg-outline-variant/10 rounded w-1/2"></div></div></div>
+<!-- THE LEAKY FUNNEL (Hero Visual) -->
+<div class="flex-1 bg-surface-container rounded diagnostic-border p-8 flex flex-col items-center relative min-h-[400px]">
+<div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#3e484f 1px, transparent 1px); background-size: 24px 24px;"></div>
+<h3 class="font-body-md text-body-md font-semibold text-on-surface w-full text-left mb-6 absolute top-6 left-6 z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">filter_alt</span>
+                        Funnel Diagnostics
+                    </h3>
+<!-- SVG Funnel Visualization to simulate technical instrument -->
+<div class="relative w-full max-w-[500px] h-full flex flex-col items-center mt-8 z-10"><div class="w-full flex flex-col items-center gap-6 mt-4 animate-pulse"><div class="w-full h-10 bg-outline-variant/10 rounded-sm"></div><div class="w-[80%] h-10 bg-outline-variant/10 rounded-sm"></div><div class="w-[60%] h-10 bg-outline-variant/20 rounded-sm"></div><div class="w-[40%] h-10 bg-outline-variant/10 rounded-sm"></div><div class="w-[20%] h-10 bg-outline-variant/10 rounded-sm"></div></div></div>
+</div>
+</div>
+<!-- RIGHT PANEL: Stage Detail (Active state for "Interview") -->
+<aside class="w-[360px] bg-surface-container-low border-l border-outline-variant flex flex-col shrink-0 h-full relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)] transform translate-x-0 transition-transform duration-300"><div class="h-16 px-gutter flex items-center border-b border-outline-variant bg-surface-container"><div class="h-6 bg-outline-variant/20 rounded w-1/2 animate-pulse"></div></div><div class="p-gutter flex flex-col gap-6 animate-pulse"><div class="space-y-3"><div class="h-4 bg-outline-variant/20 rounded w-3/4"></div><div class="h-10 bg-outline-variant/10 rounded w-1/2"></div></div><div class="space-y-4"><div class="h-3 bg-outline-variant/20 rounded w-1/3"></div><div class="h-20 bg-outline-variant/5 rounded w-full"></div><div class="h-20 bg-outline-variant/5 rounded w-full"></div></div></div></aside>
+</div>
+</main>
+</body></html>

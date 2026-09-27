@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Áp Lực Kế - Job Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#bdc8d1",
+                        "surface-container-lowest": "#060e20",
+                        "inverse-primary": "#00668a",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-secondary-container": "#5b3800",
+                        "on-error": "#690005",
+                        "background": "#0b1326",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-container": "#004d44",
+                        "surface-container-low": "#131b2e",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed": "#62fae3",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-tertiary-fixed-variant": "#005047",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#3e484f",
+                        "surface-container-high": "#222a3d",
+                        "tertiary-fixed-dim": "#3cddc7",
+                        "on-primary-container": "#004965",
+                        "inverse-on-surface": "#283044",
+                        "on-primary-fixed-variant": "#004c69",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#7bd0ff",
+                        "on-background": "#dae2fd",
+                        "on-primary-fixed": "#001e2c",
+                        "surface-variant": "#2d3449",
+                        "on-tertiary": "#003731",
+                        "tertiary": "#45e3ce",
+                        "outline": "#87929a",
+                        "on-primary": "#00354a",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#c4e7ff",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "surface-dim": "#0b1326",
+                        "tertiary-container": "#07c7b2",
+                        "primary-container": "#38bdf8",
+                        "secondary": "#ffb95f",
+                        "primary": "#8ed5ff",
+                        "on-secondary": "#472a00",
+                        "surface-container-highest": "#2d3449",
+                        "surface-bright": "#31394d",
+                        "secondary-container": "#ee9800",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface": "#0b1326",
+                        "on-tertiary-fixed": "#00201c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "cell-padding": "8px 12px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "margin": "24px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "data-label": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "data-display": ["JetBrains Mono"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-label": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom scrollbar for dense data panels */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background antialiased h-screen overflow-hidden flex">
+<!-- JSON Component: SideNavBar (Acts as global nav, pushed to far left) -->
+<nav class="h-screen w-16 md:w-64 fixed left-0 top-0 bg-surface border-r border-outline-variant flex flex-col h-full py-margin px-gutter z-50">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary text-lg">timeline</span>
+</div>
+<div class="hidden md:block overflow-hidden">
+<h1 class="font-headline-md text-headline-md font-bold text-primary truncate">Áp Lực Kế</h1>
+<p class="font-caption text-caption text-on-surface-variant truncate">Recruitment Analytics</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out group" href="#" title="Executive Overview">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden md:block truncate">Executive Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out group" href="#" title="Funnel Analytics">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="hidden md:block truncate">Funnel Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out group" href="#" title="Candidate Explorer">
+<span class="material-symbols-outlined">person_search</span>
+<span class="hidden md:block truncate">Candidate Explorer</span>
+</a>
+<!-- Active State: Job Management -->
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary-container text-on-primary-container font-bold border-r-4 border-primary transition-colors duration-150 ease-in-out group" href="#" title="Job Management">
+<span class="material-symbols-outlined filled-icon">work</span>
+<span class="hidden md:block truncate">Job Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-150 ease-in-out group mt-auto" href="#" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+<span class="hidden md:block truncate">Settings</span>
+</a>
+</div>
+<!-- User Profile -->
+<div class="mt-4 pt-4 border-t border-outline-variant px-2 flex items-center gap-3 cursor-pointer">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar placeholder image showing a subtle, dark tech-themed geometric pattern to represent a user profile in a high-tech diagnostic recruitment application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJPF0EQxrRjwPAeOWM8eLE0lTpiJ88K5GVTN6nEwKxxYVFnJfw4woddUwUvAM7R_JcfMw2DR4sgDlg9pEwy7NA4hTAFmqHNY553ieaooN2cugPGzYCSqtmsyHFn3WNvsVXls5RHTJ0yhE2FBfcWVWHm0zLdEQc5I0GBzykSA5n8ePz6l3J25bh7YzkF9cA1ApwlXdD-M39dyMAWi1PrzYhA7w5CDRpvtLpc7Vj1PSMFDkMkcV-s2RG"/>
+<div class="hidden md:block">
+<p class="font-data-label text-data-label text-on-surface">System Admin</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area Wrapper (accounts for SideNavBar width) -->
+<div class="ml-16 md:ml-64 flex flex-1 h-screen relative">
+<!-- TopAppBar (Overlayed or pushed) -->
+<header class="fixed top-0 right-0 w-[calc(100%-4rem)] md:w-[calc(100%-16rem)] h-16 bg-surface-container border-b border-outline-variant flex justify-between items-center px-margin z-40">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">Job Management</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container-highest border-outline-variant border rounded text-on-surface font-data-label text-data-label pl-9 pr-3 py-1.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none w-48 transition-all" placeholder="Search postings..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="flex items-center gap-2 bg-surface-variant border border-outline-variant rounded px-3 py-1 hover:bg-surface-bright transition-colors font-data-label text-data-label text-primary">
+<span>Last 30 Days</span>
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+</header>
+<!-- Page Content Layout -->
+<div class="flex w-full pt-16">
+<!-- Expanded Job Selector Sidebar (Secondary Nav) -->
+<aside class="w-80 h-full bg-surface-container-low border-r border-outline-variant flex flex-col flex-shrink-0">
+<!-- Secondary Header -->
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container">
+<h3 class="font-data-label text-data-label text-on-surface uppercase tracking-wider">Active Requisitions</h3>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-xs font-data-label">12 Total</span>
+</div>
+<!-- Filter/Sort Utility -->
+<div class="px-4 py-2 flex gap-2 border-b border-outline-variant bg-surface-container-lowest">
+<button class="flex-1 flex items-center justify-center gap-1 bg-surface-variant hover:bg-surface-bright border border-outline-variant rounded py-1 text-xs font-data-label text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">sort</span> Sort
+                    </button>
+<button class="flex-1 flex items-center justify-center gap-1 bg-surface-variant hover:bg-surface-bright border border-outline-variant rounded py-1 text-xs font-data-label text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">filter_alt</span> Filter
+                    </button>
+</div>
+<!-- Job List -->
+<div class="flex-1 overflow-y-auto p-2 space-y-1">
+<!-- Job Item: Active/Selected -->
+<div class="group relative bg-surface-container-highest border border-primary rounded p-3 cursor-pointer shadow-[0_0_8px_rgba(142,213,255,0.15)] overflow-hidden">
+<!-- Active Indicator Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-2 ml-1">
+<div>
+<h4 class="font-body-md font-semibold text-on-surface leading-tight">Sr. Backend Engineer</h4>
+<span class="font-caption text-caption text-primary tracking-normal uppercase bg-primary/10 px-1.5 py-0.5 rounded inline-block mt-1">Engineering</span>
+</div>
+<div class="text-right">
+<span class="font-data-display text-lg text-on-surface block">142</span>
+<span class="font-caption text-caption text-on-surface-variant">Apps</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-outline-variant/50 ml-1">
+<span class="font-data-label text-data-label text-on-surface-variant text-xs">Conv. Rate</span>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-data-label text-data-label font-bold">+4.2%</span>
+</div>
+</div>
+</div>
+<!-- Job Item: Inactive -->
+<div class="group relative hover:bg-surface-container-highest border border-transparent hover:border-outline-variant rounded p-3 cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-md text-on-surface-variant group-hover:text-on-surface leading-tight transition-colors">Product Manager</h4>
+<span class="font-caption text-caption text-secondary tracking-normal uppercase bg-secondary/10 px-1.5 py-0.5 rounded inline-block mt-1">Product</span>
+</div>
+<div class="text-right">
+<span class="font-data-display text-lg text-on-surface-variant group-hover:text-on-surface block transition-colors">87</span>
+<span class="font-caption text-caption text-outline">Apps</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-outline-variant/30">
+<span class="font-data-label text-data-label text-outline text-xs">Conv. Rate</span>
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span class="font-data-label text-data-label font-bold">-1.1%</span>
+</div>
+</div>
+</div>
+<!-- Job Item: Inactive -->
+<div class="group relative hover:bg-surface-container-highest border border-transparent hover:border-outline-variant rounded p-3 cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-md text-on-surface-variant group-hover:text-on-surface leading-tight transition-colors">UX Researcher</h4>
+<span class="font-caption text-caption text-tertiary-fixed-dim tracking-normal uppercase bg-tertiary-fixed-dim/10 px-1.5 py-0.5 rounded inline-block mt-1">Design</span>
+</div>
+<div class="text-right">
+<span class="font-data-display text-lg text-on-surface-variant group-hover:text-on-surface block transition-colors">45</span>
+<span class="font-caption text-caption text-outline">Apps</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-outline-variant/30">
+<span class="font-data-label text-data-label text-outline text-xs">Conv. Rate</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-[14px]">trending_flat</span>
+<span class="font-data-label text-data-label font-bold">0.0%</span>
+</div>
+</div>
+</div>
+<!-- Job Item: Inactive -->
+<div class="group relative hover:bg-surface-container-highest border border-transparent hover:border-outline-variant rounded p-3 cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-md text-on-surface-variant group-hover:text-on-surface leading-tight transition-colors">Data Scientist</h4>
+<span class="font-caption text-caption text-primary tracking-normal uppercase bg-primary/10 px-1.5 py-0.5 rounded inline-block mt-1">Engineering</span>
+</div>
+<div class="text-right">
+<span class="font-data-display text-lg text-on-surface-variant group-hover:text-on-surface block transition-colors">210</span>
+<span class="font-caption text-caption text-outline">Apps</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-outline-variant/30">
+<span class="font-data-label text-data-label text-outline text-xs">Conv. Rate</span>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-data-label text-data-label font-bold">+2.8%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="p-4 border-t border-outline-variant bg-surface-container">
+<button class="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-data-label text-data-label py-2 rounded flex items-center justify-center gap-2 transition-colors shadow-[0_0_10px_rgba(142,213,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        New Job Requisition
+                    </button>
+</div>
+</aside>
+<!-- Main Data Canvas (Placeholder for selected job details) -->
+<main class="flex-1 bg-background p-6 overflow-y-auto">
+<div class="max-w-5xl mx-auto space-y-6">
+<!-- Header Section for Selected Job -->
+<div class="flex justify-between items-start border-b border-outline-variant pb-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sr. Backend Engineer</h2>
+<span class="bg-primary/20 text-primary border border-primary/50 px-2 py-1 rounded text-xs font-data-label uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                    Active
+                                </span>
+</div>
+<p class="font-data-label text-data-label text-on-surface-variant font-mono">REQ-2023-084 • Opened: Oct 12, 2023 • Hiring Manager: Sarah Jenkins</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface border border-outline-variant px-3 py-1.5 rounded font-data-label text-data-label flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                            </button>
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface border border-outline-variant px-3 py-1.5 rounded font-data-label text-data-label flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">pause</span> Suspend
+                            </button>
+</div>
+</div>
+<!-- Bento Grid for Diagnostics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- KPI Card 1 -->
+<div class="bg-surface-container border border-outline-variant rounded p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Total Applicants</span>
+<span class="material-symbols-outlined text-outline">group</span>
+</div>
+<div class="mt-4">
+<span class="font-data-display text-3xl text-on-surface">142</span>
+<div class="w-full bg-surface-container-highest h-1 mt-2 rounded overflow-hidden">
+<div class="bg-primary w-[45%] h-full"></div>
+</div>
+<p class="font-caption text-caption text-outline mt-2 text-right">45% Capacity</p>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-surface-container border border-outline-variant rounded p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Time to Fill (Est)</span>
+<span class="material-symbols-outlined text-outline">timer</span>
+</div>
+<div class="mt-4">
+<span class="font-data-display text-3xl text-on-surface">34 <span class="text-lg text-outline">days</span></span>
+<div class="w-full bg-surface-container-highest h-1 mt-2 rounded overflow-hidden">
+<div class="bg-secondary w-[70%] h-full"></div>
+</div>
+<p class="font-caption text-caption text-secondary mt-2 text-right">Approaching SLA</p>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-surface-container border border-outline-variant rounded p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Funnel Health</span>
+<span class="material-symbols-outlined text-outline">health_and_safety</span>
+</div>
+<div class="mt-4">
+<span class="font-data-display text-3xl text-tertiary">Good</span>
+<div class="flex gap-1 mt-2">
+<div class="h-1 flex-1 bg-tertiary rounded"></div>
+<div class="h-1 flex-1 bg-tertiary rounded"></div>
+<div class="h-1 flex-1 bg-tertiary rounded"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded"></div>
+</div>
+<p class="font-caption text-caption text-outline mt-2 text-right">Pass Rate: 18%</p>
+</div>
+</div>
+</div>
+<!-- Decorative placeholder for main data table -->
+<div class="border border-outline-variant rounded bg-surface-container min-h-[300px] flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, theme('colors.outline') 1px, transparent 0); background-size: 20px 20px;"></div>
+<p class="font-data-label text-data-label text-outline z-10 bg-surface-container px-4 py-2 rounded border border-outline-variant">Candidate Pipeline Table (Select Candidate to View)</p>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model JobRequisition {
+  id                String       @id @default(cuid())
+  reqCode           String       @unique // e.g. REQ-142, REQ-89
+  title             String       // e.g. "Sr. Backend Engineer"
+  department        String       // e.g. "ENGINEERING", "PRODUCT", "DESIGN"
+  status            String       @default("ACTIVE") // ACTIVE, PAUSED, CLOSED
+  hiringManager     String       @default("Sarah Jenkins")
+  targetDaysToFill  Int          @default(30)
+  totalApplicants   Int          @default(0)
+  conversionRate    Float        @default(0.0)
+  conversionTrend   String       @default("+0.0%")
+  funnelHealth      String       @default("Good")
+  avgTimeToHireDays Float        @default(18.0)
+  timeVsPrevTrend   Float        @default(-2.4)
+  primaryBottleneck String       @default("Tech Interview")
+  bottleneckDropRate Float       @default(42.0)
+  openedAt          DateTime     @default(now())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  stages            Stage[]
+  candidates        Candidate[]
+  stageEntries      StageEntry[]
+}
+
+model Stage {
+  id                String       @id @default(cuid())
+  name              String       // "Applied", "Screened", "Tech Interview", "Offer", "Hired"
+  stageOrder        Int          // 1, 2, 3, 4, 5
+  jobRequisitionId  String
+  targetDaysInStage Float        @default(5.0)
+  avgDaysInStage    Float        @default(0.0)
+  volumeIn          Int          @default(0)
+  volumePassed      Int          @default(0)
+  volumeDropped     Int          @default(0)
+  dropRate          Float        @default(0.0)
+  isBottleneck      Boolean      @default(false)
+
+  jobRequisition    JobRequisition @relation(fields: [jobRequisitionId], references: [id], onDelete: Cascade)
+  stageEntries      StageEntry[]
+  dropReasons       StageDropReason[]
+
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@unique([jobRequisitionId, stageOrder])
+}
+
+model StageDropReason {
+  id          String   @id @default(cuid())
+  stageId     String
+  reasonCode  String   // ERR_TECH_GAP, ERR_SALARY, ERR_CULTURE, ERR_GHOSTED, ERR_COMPETITOR
+  label       String   // "Failed Tech Screen", "Salary Expectations", "Ghosted / No Show", "Competitor Offer"
+  count       Int      @default(0)
+  percentage  Float    @default(0.0)
+
+  stage       Stage    @relation(fields: [stageId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Candidate {
+  id                String       @id @default(cuid())
+  candidateId       String       @unique // e.g. "BW-1022", "JD-8932", "AS-4419"
+  name              String
+  email             String
+  role              String       @default("Software Engineer")
+  jobId             String
+  currentStage      String       @default("Screening")
+  timeInStageDays   Int          @default(1)
+  healthIndex       Int          @default(80) // 0-100 score
+  assignedRecruiter String       @default("S. Miller")
+  status            String       @default("ACTIVE") // ACTIVE, DROPPED, HIRED
+  dropReasonCode    String?      // ERR_TECH_GAP, ERR_SALARY, ERR_CULTURE, ERR_GHOSTED, ERR_COMPETITOR
+  dropReasonDetail  String?
+  companyOrigin     String?
+  appliedAt         DateTime     @default(now())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  jobRequisition    JobRequisition @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  stageEntries      StageEntry[]
+}
+
+model StageEntry {
+  id                String       @id @default(cuid())
+  candidateId       String?
+  candidateName     String
+  candidateEmail    String?
+  candidateCode     String?
+  role              String?
+  jobId             String
+  stageId           String?
+  stageName         String       // "Applied", "Screened", "Tech Interview", "Offer", "Hired"
+  stageOrder        Int          @default(1)
+  status            String       @default("ACTIVE") // ACTIVE, DROPPED, HIRED
+  daysInStage       Int          @default(1)
+  dropReason        String?      // ERR_TECH_GAP, ERR_SALARY, ERR_GHOSTED, ERR_COMPETITOR, ERR_CULTURE
+  dropReasonDetail  String?
+  companyOrigin     String?
+  assignedRecruiter String       @default("S. Miller")
+  healthIndex       Int          @default(80)
+  appliedAt         DateTime     @default(now())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  job               JobRequisition @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  stage             Stage?         @relation(fields: [stageId], references: [id], onDelete: SetNull)
+  candidate         Candidate?     @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+}

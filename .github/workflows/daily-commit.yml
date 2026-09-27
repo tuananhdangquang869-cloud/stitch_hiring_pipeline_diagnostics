@@ -1,0 +1,33 @@
+name: Daily Green Streak
+
+on:
+  schedule:
+    # Chạy tự động lúc 01:00 UTC (08:00 sáng giờ VN) mỗi ngày
+    - cron: '0 1 * * *'
+    # Có thể thêm khung giờ thứ 2 nếu muốn xanh đậm hơn:
+    - cron: '30 13 * * *'
+  workflow_dispatch: # Cho phép bấm nút "Run workflow" bằng tay để test bất kỳ lúc nào
+
+jobs:
+  make-contributions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Quyền ghi để có thể commit & push lên repo
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Auto Update Log & Commit
+        run: |
+          # 1. Đặt thông tin commit (Thay bằng username & email GitHub của bạn để xanh profile)
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          
+          # 2. Ghi thời gian hiện tại vào file nhật ký
+          mkdir -p .github
+          echo "Last active: $(date -u)" >> .github/activity.log
+          
+          # 3. Stage, commit và push
+          git add .github/activity.log
+          git commit -m "chore(telemetry): automated daily health check [skip ci]" || exit 0
+          git push origin main

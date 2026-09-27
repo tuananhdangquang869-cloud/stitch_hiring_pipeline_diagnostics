@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Áp Lực Kế - Mobile Funnel Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#00354a",
+                      "surface-container": "#201f20",
+                      "tertiary": "#ffbcb7",
+                      "on-error-container": "#ffdad6",
+                      "text-primary": "#F5F5F5",
+                      "inverse-primary": "#855300",
+                      "surface": "#16171A",
+                      "on-tertiary-container": "#8d0012",
+                      "surface-container-high": "#2a2a2b",
+                      "on-background": "#e5e2e3",
+                      "background": "#131314",
+                      "inverse-surface": "#e5e2e3",
+                      "surface-variant": "#353436",
+                      "on-surface": "#e5e2e3",
+                      "tertiary-fixed-dim": "#ffb3ad",
+                      "error": "#ffb4ab",
+                      "on-secondary-fixed": "#001e2c",
+                      "primary-fixed-dim": "#ffb95f",
+                      "tertiary-fixed": "#ffdad7",
+                      "primary": "#ffc174",
+                      "on-secondary-fixed-variant": "#004c69",
+                      "secondary": "#7bd0ff",
+                      "secondary-fixed-dim": "#7bd0ff",
+                      "border-low": "#262626",
+                      "surface-container-highest": "#353436",
+                      "outline": "#a08e7a",
+                      "tertiary-container": "#ff938c",
+                      "primary-container": "#f59e0b",
+                      "on-secondary-container": "#00374d",
+                      "on-primary-container": "#613b00",
+                      "on-primary-fixed": "#2a1700",
+                      "on-primary-fixed-variant": "#653e00",
+                      "surface-bright": "#3a393a",
+                      "inverse-on-surface": "#313031",
+                      "on-surface-variant": "#d8c3ad",
+                      "on-primary": "#472a00",
+                      "primary-fixed": "#ffddb8",
+                      "surface-container-low": "#1c1b1c",
+                      "outline-variant": "#534434",
+                      "surface-tint": "#ffb95f",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#c4e7ff",
+                      "on-tertiary-fixed-variant": "#930013",
+                      "text-muted": "#9CA3AF",
+                      "on-tertiary": "#68000a",
+                      "on-error": "#690005",
+                      "surface-dim": "#0A0A0B",
+                      "on-tertiary-fixed": "#410004",
+                      "surface-container-lowest": "#0e0e0f",
+                      "secondary-container": "#00a6e0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "32px",
+                      "container-max": "1440px",
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "display-data": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "caption": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-data": [
+                              "48px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .funnel-bar-transition {
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .accordion-content.expanded {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+        .vitals-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-[#0A0A0B] flex justify-center min-h-screen text-on-surface font-body-md overflow-x-hidden antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Mobile Device Container for Preview -->
+<div class="w-full max-w-[390px] bg-[#0A0A0B] relative flex flex-col shadow-2xl overflow-hidden border-x border-border-low">
+<!-- TopAppBar (Adapted for mobile from JSON) -->
+<header class="bg-surface-container dark:bg-surface-container w-full h-16 flex justify-between items-center px-margin-mobile border-b border-border-low dark:border-border-low z-20 sticky top-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary cursor-pointer active:scale-95 transition-transform">menu</span>
+<span class="font-headline-md text-headline-md text-text-primary font-bold tracking-tight">Áp Lực Kế</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-muted hover:text-secondary cursor-pointer active:scale-95 transition-transform" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<div class="h-8 w-8 rounded-full bg-surface-variant border border-border-low overflow-hidden flex items-center justify-center cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-text-muted" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col overflow-y-auto no-scrollbar">
+<!-- Page Header -->
+<div class="px-margin-mobile py-gutter flex justify-between items-end border-b border-border-low/50 bg-surface/50 backdrop-blur-sm sticky top-0 z-10">
+<div>
+<h1 class="font-headline-md text-headline-md text-text-primary font-bold">Funnel Diagnostics</h1>
+<p class="font-caption text-caption text-text-muted mt-1">Live Pipeline Status</p>
+</div>
+<div class="flex items-center gap-1.5 text-secondary">
+<div class="relative w-2 h-2 rounded-full bg-secondary">
+<div class="absolute inset-0 rounded-full bg-secondary vitals-pulse"></div>
+</div>
+<span class="font-label-mono text-label-mono">ACTIVE</span>
+</div>
+</div>
+<!-- Job Selection Chips (Scrollable) -->
+<div class="px-margin-mobile py-gutter border-b border-border-low/30">
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mb-2">
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-variant text-text-primary font-label-mono text-label-mono border border-border-low flex items-center gap-1.5 shadow-[0_0_8px_rgba(123,208,255,0.2)]">
+<span class="material-symbols-outlined text-[14px]">work</span>
+                        Sr. Frontend Engineer
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-text-muted font-label-mono text-label-mono border border-border-low flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Product Designer
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-text-muted font-label-mono text-label-mono border border-border-low flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Backend Lead
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-text-muted font-label-mono text-label-mono border border-border-low flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Data Scientist
+                    </button>
+</div>
+</div>
+<!-- Funnel Content -->
+<div class="p-gutter flex flex-col gap-3">
+<!-- Stage 1: Applied -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-applied')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-border-low rounded overflow-hidden">
+<!-- Bar Fill -->
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-primary border-r border-border-low funnel-bar-transition group-hover:opacity-80" style="width: 100%;"></div>
+<!-- Content Overlay -->
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider flex items-center gap-2 mix-blend-difference">
+<span class="w-1.5 h-1.5 rounded-full bg-text-primary"></span>
+                                Applied
+                            </span>
+<span class="font-display-data text-[24px] font-bold text-text-primary mix-blend-difference">1,204</span>
+</div>
+</div>
+<!-- Accordion (Hidden by default) -->
+<div class="accordion-content" id="acc-applied">
+<div class="accordion-inner bg-surface-container border-x border-b border-border-low rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-text-muted">info</span>
+<span class="font-caption text-caption text-text-muted">No significant drop-off anomalies detected at entry.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 2: Screened -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-screened')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-border-low rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-primary border-r border-border-low funnel-bar-transition group-hover:opacity-80" style="width: 70%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider flex items-center gap-2 mix-blend-difference">
+<span class="w-1.5 h-1.5 rounded-full bg-text-primary"></span>
+                                Screened
+                            </span>
+<span class="font-display-data text-[24px] font-bold text-text-primary mix-blend-difference">842</span>
+</div>
+</div>
+<div class="accordion-content" id="acc-screened">
+<div class="accordion-inner bg-surface-container border-x border-b border-border-low rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-caption text-caption">
+<span class="text-text-muted">Incomplete Assessment</span>
+<span class="text-text-primary">62%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 62%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 3: Interview (Expanded to show complex state) -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-interview')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-border-low rounded overflow-hidden shadow-[inset_0_0_12px_rgba(255,193,116,0.05)] border-l-2 border-l-primary">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-error border-r border-error/50 funnel-bar-transition group-hover:opacity-80" style="width: 26%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider flex items-center gap-2 mix-blend-difference">
+<span class="material-symbols-outlined text-[16px] text-text-primary">warning</span>
+                                Interview
+                            </span>
+<span class="font-display-data text-[24px] font-bold text-text-primary mix-blend-difference">312</span>
+</div>
+</div>
+<!-- Pre-expanded accordion -->
+<div class="accordion-content expanded" id="acc-interview">
+<div class="accordion-inner bg-surface-container border-x border-b border-border-low rounded-b -mt-1 pt-3 pb-3 px-3">
+<div class="flex items-center gap-2 mb-3 border-b border-border-low pb-2">
+<span class="font-caption text-caption text-error bg-error/10 px-1.5 py-0.5 rounded uppercase">High Leakage</span>
+<span class="font-caption text-caption text-text-muted">Critical drop-off in technical phase.</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Reason 1 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-text-primary text-[11px]">Failed Technical Task</span>
+<span class="text-primary font-bold">68%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-lowest border border-border-low/50 rounded-sm overflow-hidden p-[1px]">
+<div class="h-full bg-primary rounded-sm" style="width: 68%;"></div>
+</div>
+</div>
+<!-- Reason 2 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-text-muted text-[11px]">Salary Expectations</span>
+<span class="text-text-primary">22%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-lowest border border-border-low/50 rounded-sm overflow-hidden p-[1px]">
+<div class="h-full bg-surface-variant rounded-sm" style="width: 22%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 4: Offer -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-offer')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-border-low rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-primary border-r border-border-low funnel-bar-transition group-hover:opacity-80" style="width: 12%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider flex items-center gap-2 mix-blend-difference">
+<span class="w-1.5 h-1.5 rounded-full bg-text-primary"></span>
+                                Offer
+                            </span>
+<span class="font-display-data text-[24px] font-bold text-text-primary mix-blend-difference">144</span>
+</div>
+</div>
+<div class="accordion-content" id="acc-offer">
+<div class="accordion-inner bg-surface-container border-x border-b border-border-low rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-caption text-caption">
+<span class="text-text-muted">Declined (Competitor)</span>
+<span class="text-text-primary">15%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-surface-variant" style="width: 15%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 5: Hired -->
+<div class="group">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-border-low rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-primary border-r border-border-low funnel-bar-transition group-hover:opacity-80" style="width: 5%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider flex items-center gap-2 mix-blend-difference">
+<span class="material-symbols-outlined text-[16px] text-text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Hired
+                            </span>
+<span class="font-display-data text-[24px] font-bold text-text-primary mix-blend-difference">62</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom spacing -->
+<div class="h-12"></div>
+</main>
+</div>
+<script>
+        function toggleAccordion(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('expanded');
+            }
+        }
+    </script>
+</body></html>

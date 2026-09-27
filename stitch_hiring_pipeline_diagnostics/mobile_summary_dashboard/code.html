@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Áp Lực Kế - Executive Overview (Mobile)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-background": "#dae2fd",
+                      "surface-bright": "#31394d",
+                      "tertiary-container": "#07c7b2",
+                      "on-tertiary-fixed": "#00201c",
+                      "secondary-container": "#ee9800",
+                      "on-surface-variant": "#bdc8d1",
+                      "surface-container-high": "#222a3d",
+                      "on-secondary": "#472a00",
+                      "on-tertiary-container": "#004d44",
+                      "on-primary-fixed": "#001e2c",
+                      "surface-container": "#171f33",
+                      "primary-container": "#38bdf8",
+                      "inverse-surface": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "surface-tint": "#7bd0ff",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "surface-dim": "#0b1326",
+                      "surface-container-low": "#131b2e",
+                      "secondary-fixed": "#ffddb8",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "inverse-primary": "#00668a",
+                      "on-primary-fixed-variant": "#004c69",
+                      "secondary": "#ffb95f",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#003731",
+                      "surface-variant": "#2d3449",
+                      "on-secondary-fixed": "#2a1700",
+                      "surface-container-highest": "#2d3449",
+                      "error": "#ffb4ab",
+                      "tertiary": "#45e3ce",
+                      "surface": "#0b1326",
+                      "outline-variant": "#3e484f",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "surface-container-lowest": "#060e20",
+                      "primary-fixed-dim": "#7bd0ff",
+                      "on-primary": "#00354a",
+                      "primary-fixed": "#c4e7ff",
+                      "background": "#0b1326",
+                      "on-secondary-container": "#5b3800",
+                      "outline": "#87929a",
+                      "inverse-on-surface": "#283044",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#004965",
+                      "primary": "#8ed5ff",
+                      "tertiary-fixed": "#62fae3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin": "24px",
+                      "gutter": "16px",
+                      "base": "4px",
+                      "cell-padding": "8px 12px"
+              },
+              "fontFamily": {
+                      "data-label": [
+                              "JetBrains Mono"
+                      ],
+                      "data-display": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "data-label": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-display": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "caption": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+        }
+        .inset-border {
+            box-shadow: inset 0 0 0 1px theme('colors.outline-variant');
+        }
+        .vitals-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            80%, 100% { transform: scale(2.5); opacity: 0; }
+        }
+        
+        /* Hide scrollbar for clean mobile look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-[80px]"> <!-- padding bottom for mobile nav -->
+<!-- Top App Bar (Mobile View) -->
+<header class="sticky top-0 z-50 bg-surface-container border-b border-outline-variant flex justify-between items-center px-gutter h-14 w-full">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Áp Lực Kế</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A macro shot of a sleek, dark metallic user profile avatar placeholder, glowing slightly with a blue led light rim, set against a dark grey carbon fiber texture. High contrast, studio lighting, hyper-detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEzm5FnQDcpaKiQHAbWA3A8BuM7c-HXhT5e0zYRN5llJmi9vXDrFg-toM49Z2xQCBUgT3qHSeJngyllQoHmRhrrmNwn8ZEdjSJZRl-Bh78McjolgMpJwmuLRApbno2s-E_Ri8l7feN1M7oPPZb3c2i31VEoxiaFOPjwH1lZTdoCcWHwiCHx0fCtJ1_CGErHY2LaQWVFbkjBhQPf9QZKyFe6o-GiQmcQ3TJRUPd2o_kXc7JNbYQM9wB"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="p-gutter flex flex-col gap-gutter max-w-md mx-auto">
+<!-- Header / Date Range -->
+<div class="flex justify-between items-center py-2">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Executive Overview</h2>
+<p class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Mobile Diagnostic View</p>
+</div>
+<div class="px-3 py-1 bg-surface-container rounded inset-border flex items-center gap-1 cursor-pointer">
+<span class="material-symbols-outlined text-[14px] text-primary">calendar_today</span>
+<span class="font-data-label text-data-label text-primary">L30D</span>
+</div>
+</div>
+<!-- Alerts Section -->
+<section class="flex flex-col gap-2">
+<div class="bg-error-container/20 border border-error/50 rounded p-3 flex items-start gap-3 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<span class="material-symbols-outlined text-error mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div>
+<h3 class="font-data-label text-data-label text-error font-bold uppercase tracking-wider">Critical Bottleneck</h3>
+<p class="font-body-md text-body-md text-on-surface/80 mt-1">Tech Screen pass rate dropped to 12% (-8% WoW) for Senior Engineering roles.</p>
+</div>
+</div>
+<div class="bg-secondary-container/10 border border-secondary/30 rounded p-3 flex items-start gap-3 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<span class="material-symbols-outlined text-secondary mt-0.5">info</span>
+<div>
+<h3 class="font-data-label text-data-label text-secondary font-bold uppercase tracking-wider">Capacity Warning</h3>
+<p class="font-body-md text-body-md text-on-surface/80 mt-1">Recruiter load exceeds optimal threshold by 15%.</p>
+</div>
+</div>
+</section>
+<!-- Stacked KPI Cards -->
+<section class="grid grid-cols-2 gap-3 mt-2">
+<!-- KPI 1 -->
+<div class="bg-surface-container rounded p-4 inset-border flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant uppercase">Active<br/>Reqs</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">work</span>
+</div>
+<div>
+<div class="font-data-display text-data-display text-on-surface">142</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">trending_up</span>
+<span class="font-data-label text-data-label text-tertiary">+5%</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container rounded p-4 inset-border flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-caption text-caption text-on-surface-variant uppercase">Time to<br/>Fill</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span>
+</div>
+<div>
+<div class="font-data-display text-data-display text-on-surface">45<span class="text-[14px] text-on-surface-variant ml-1 font-normal">d</span></div>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-error">trending_up</span>
+<span class="font-data-label text-data-label text-error">+2d</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 (Full width) -->
+<div class="col-span-2 bg-surface-container rounded p-4 inset-border flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-surface-variant uppercase mb-1">Offer Acceptance Rate</span>
+<div class="font-data-display text-data-display text-on-surface">88.5%</div>
+</div>
+<!-- Mini Gauge -->
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88.5, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Simplified Funnel Visualization -->
+<section class="mt-4">
+<h3 class="font-data-label text-data-label text-on-surface-variant uppercase tracking-wider mb-3">Funnel Diagnostic (YTD)</h3>
+<div class="bg-surface-container rounded inset-border p-4 flex flex-col gap-4">
+<!-- Funnel Step 1 -->
+<div class="relative flex items-center">
+<div class="w-24 font-data-label text-data-label text-on-surface text-right pr-3 border-r border-outline-variant">Sourced</div>
+<div class="flex-1 pl-3">
+<div class="w-full bg-surface-variant h-6 rounded-r relative overflow-hidden flex items-center px-2">
+<div class="absolute left-0 top-0 bottom-0 bg-primary/20 w-full"></div>
+<span class="font-data-label text-[10px] text-on-surface relative z-10">10,450</span>
+</div>
+</div>
+</div>
+<!-- Funnel Step 2 -->
+<div class="relative flex items-center">
+<div class="w-24 font-data-label text-data-label text-on-surface text-right pr-3 border-r border-outline-variant relative">
+                         Screened
+                         <!-- Leakage indicator -->
+<div class="absolute -right-[1px] top-1/2 -translate-y-1/2 w-4 h-[1px] bg-secondary"></div>
+</div>
+<div class="flex-1 pl-3 relative">
+<div class="w-[60%] bg-surface-variant h-6 rounded-r relative overflow-hidden flex items-center px-2">
+<div class="absolute left-0 top-0 bottom-0 bg-primary/40 w-full"></div>
+<span class="font-data-label text-[10px] text-on-surface relative z-10">6,200</span>
+</div>
+<div class="absolute right-0 top-1/2 -translate-y-1/2 font-caption text-[9px] text-secondary flex items-center">
+<span class="material-symbols-outlined text-[10px]">arrow_right_alt</span> 40% Drop
+                        </div>
+</div>
+</div>
+<!-- Funnel Step 3 -->
+<div class="relative flex items-center">
+<div class="w-24 font-data-label text-data-label text-on-surface text-right pr-3 border-r border-outline-variant">Interview</div>
+<div class="flex-1 pl-3">
+<div class="w-[25%] bg-surface-variant h-6 rounded-r relative overflow-hidden flex items-center px-2">
+<div class="absolute left-0 top-0 bottom-0 bg-primary/60 w-full"></div>
+<span class="font-data-label text-[10px] text-on-surface relative z-10">2,600</span>
+</div>
+</div>
+</div>
+<!-- Funnel Step 4 -->
+<div class="relative flex items-center">
+<div class="w-24 font-data-label text-data-label text-on-surface text-right pr-3 border-r border-outline-variant">Offer</div>
+<div class="flex-1 pl-3">
+<div class="w-[8%] bg-surface-variant h-6 rounded-r relative overflow-hidden flex items-center px-2">
+<div class="absolute left-0 top-0 bottom-0 bg-primary/80 w-full"></div>
+<span class="font-data-label text-[10px] text-on-surface relative z-10">840</span>
+</div>
+</div>
+</div>
+<!-- Funnel Step 5 -->
+<div class="relative flex items-center">
+<div class="w-24 font-data-label text-data-label text-primary font-bold text-right pr-3 border-r border-primary">Hired</div>
+<div class="flex-1 pl-3">
+<div class="w-[7%] bg-primary h-6 rounded-r relative overflow-hidden flex items-center px-2">
+<span class="font-data-label text-[10px] text-on-primary relative z-10">743</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant h-[72px] md:hidden z-50">
+<div class="flex justify-around items-center h-full px-2">
+<!-- Tab 1: Executive Overview (ACTIVE) -->
+<div class="flex flex-col items-center justify-center w-16 gap-1 cursor-pointer group">
+<div class="w-14 h-8 rounded-full bg-primary-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<span class="font-caption text-[10px] font-bold text-primary text-center leading-tight">Executive<br/>Overview</span>
+</div>
+<!-- Tab 2: Funnel Analytics (INACTIVE) -->
+<div class="flex flex-col items-center justify-center w-16 gap-1 cursor-pointer group">
+<div class="w-14 h-8 rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">filter_list</span>
+</div>
+<span class="font-caption text-[10px] text-on-surface-variant group-hover:text-on-surface text-center leading-tight">Funnel<br/>Analytics</span>
+</div>
+<!-- Tab 3: Candidate Explorer (INACTIVE) -->
+<div class="flex flex-col items-center justify-center w-16 gap-1 cursor-pointer group">
+<div class="w-14 h-8 rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">person_search</span>
+</div>
+<span class="font-caption text-[10px] text-on-surface-variant group-hover:text-on-surface text-center leading-tight">Candidate<br/>Explorer</span>
+</div>
+<!-- Tab 4: Job Management (INACTIVE) -->
+<div class="flex flex-col items-center justify-center w-16 gap-1 cursor-pointer group">
+<div class="w-14 h-8 rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">work</span>
+</div>
+<span class="font-caption text-[10px] text-on-surface-variant group-hover:text-on-surface text-center leading-tight">Job<br/>Management</span>
+</div>
+<!-- Tab 5: Settings (INACTIVE) -->
+<div class="flex flex-col items-center justify-center w-16 gap-1 cursor-pointer group">
+<div class="w-14 h-8 rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">settings</span>
+</div>
+<span class="font-caption text-[10px] text-on-surface-variant group-hover:text-on-surface text-center leading-tight">Settings</span>
+</div>
+</div>
+</nav>
+</body></html>

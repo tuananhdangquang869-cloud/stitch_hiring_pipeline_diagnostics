@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Áp Lực Kế - Mobile Funnel Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#bdc8d1",
+                      "surface-container-lowest": "#060e20",
+                      "inverse-primary": "#00668a",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-secondary-container": "#5b3800",
+                      "on-error": "#690005",
+                      "background": "#0b1326",
+                      "secondary-fixed": "#ffddb8",
+                      "on-tertiary-container": "#004d44",
+                      "surface-container-low": "#131b2e",
+                      "surface-container": "#171f33",
+                      "on-surface": "#dae2fd",
+                      "tertiary-fixed": "#62fae3",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#3e484f",
+                      "surface-container-high": "#222a3d",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "on-primary-container": "#004965",
+                      "inverse-on-surface": "#283044",
+                      "on-primary-fixed-variant": "#004c69",
+                      "inverse-surface": "#dae2fd",
+                      "surface-tint": "#7bd0ff",
+                      "on-background": "#dae2fd",
+                      "on-primary-fixed": "#001e2c",
+                      "surface-variant": "#2d3449",
+                      "on-tertiary": "#003731",
+                      "tertiary": "#45e3ce",
+                      "outline": "#87929a",
+                      "on-primary": "#00354a",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#c4e7ff",
+                      "primary-fixed-dim": "#7bd0ff",
+                      "surface-dim": "#0b1326",
+                      "tertiary-container": "#07c7b2",
+                      "primary-container": "#38bdf8",
+                      "secondary": "#ffb95f",
+                      "primary": "#8ed5ff",
+                      "on-secondary": "#472a00",
+                      "surface-container-highest": "#2d3449",
+                      "surface-bright": "#31394d",
+                      "secondary-container": "#ee9800",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "surface": "#0b1326",
+                      "on-tertiary-fixed": "#00201c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "cell-padding": "8px 12px",
+                      "base": "4px",
+                      "gutter": "16px",
+                      "margin": "24px"
+              },
+              "fontFamily": {
+                      "caption": ["Inter"],
+                      "body-md": ["Inter"],
+                      "data-label": ["JetBrains Mono"],
+                      "headline-lg": ["Inter"],
+                      "data-display": ["JetBrains Mono"],
+                      "headline-md": ["Inter"]
+              },
+              "fontSize": {
+                      "caption": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "data-display": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .funnel-bar-transition {
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .accordion-content.expanded {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+        .vitals-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-surface-dim flex justify-center min-h-screen text-on-surface font-body-md overflow-x-hidden antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Mobile Device Container for Preview -->
+<div class="w-full max-w-[390px] bg-background relative flex flex-col shadow-2xl overflow-hidden border-x border-outline-variant">
+<!-- TopAppBar (Adapted for mobile from JSON) -->
+<header class="bg-surface-container dark:bg-surface-container w-full h-16 flex justify-between items-center px-margin border-b border-outline-variant dark:border-outline-variant z-20 sticky top-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">menu</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Áp Lực Kế</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer active:scale-95 transition-transform" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<div class="h-8 w-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden flex items-center justify-center cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col overflow-y-auto no-scrollbar">
+<!-- Page Header -->
+<div class="px-margin py-gutter flex justify-between items-end border-b border-outline-variant/50 bg-surface/50 backdrop-blur-sm sticky top-0 z-10">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold">Funnel Diagnostics</h1>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Live Pipeline Status</p>
+</div>
+<div class="flex items-center gap-1.5 text-primary">
+<div class="relative w-2 h-2 rounded-full bg-primary">
+<div class="absolute inset-0 rounded-full bg-primary vitals-pulse"></div>
+</div>
+<span class="font-data-label text-data-label">ACTIVE</span>
+</div>
+</div>
+<!-- Job Selection Chips (Scrollable) -->
+<div class="px-margin py-gutter border-b border-outline-variant/30">
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mb-2">
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-primary text-on-primary font-data-label text-data-label border border-primary flex items-center gap-1.5 shadow-[0_0_8px_rgba(142,213,255,0.2)]">
+<span class="material-symbols-outlined text-[14px]">work</span>
+                        Sr. Frontend Engineer
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-on-surface-variant font-data-label text-data-label border border-outline-variant flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Product Designer
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-on-surface-variant font-data-label text-data-label border border-outline-variant flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Backend Lead
+                    </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded bg-surface-container text-on-surface-variant font-data-label text-data-label border border-outline-variant flex items-center gap-1.5 active:bg-surface-variant transition-colors">
+                        Data Scientist
+                    </button>
+</div>
+</div>
+<!-- Funnel Content -->
+<div class="p-gutter flex flex-col gap-3">
+<!-- Stage 1: Applied -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-applied')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-outline-variant rounded overflow-hidden">
+<!-- Bar Fill -->
+<div class="absolute top-0 left-0 h-full bg-surface-container-highest border-r border-outline-variant funnel-bar-transition group-hover:bg-surface-variant" style="width: 100%;"></div>
+<!-- Content Overlay -->
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-data-label text-data-label text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                Applied
+                            </span>
+<span class="font-data-display text-data-display text-on-surface">1,204</span>
+</div>
+</div>
+<!-- Accordion (Hidden by default) -->
+<div class="accordion-content" id="acc-applied">
+<div class="accordion-inner bg-surface-container border-x border-b border-outline-variant rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">info</span>
+<span class="font-caption text-caption text-on-surface-variant">No significant drop-off anomalies detected at entry.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 2: Screened -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-screened')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-outline-variant rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-surface-container-highest border-r border-outline-variant funnel-bar-transition group-hover:bg-surface-variant" style="width: 70%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-data-label text-data-label text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                                Screened
+                            </span>
+<span class="font-data-display text-data-display text-on-surface">842</span>
+</div>
+</div>
+<div class="accordion-content" id="acc-screened">
+<div class="accordion-inner bg-surface-container border-x border-b border-outline-variant rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-caption text-caption">
+<span class="text-on-surface-variant">Incomplete Assessment</span>
+<span class="text-on-surface">62%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 62%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 3: Interview (Expanded to show complex state) -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-interview')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-[inset_0_0_12px_rgba(255,185,95,0.05)] border-l-2 border-l-secondary">
+<div class="absolute top-0 left-0 h-full bg-secondary/10 border-r border-secondary/50 funnel-bar-transition group-hover:bg-secondary/20" style="width: 26%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-data-label text-data-label text-secondary uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">warning</span>
+                                Interview
+                            </span>
+<span class="font-data-display text-data-display text-secondary">312</span>
+</div>
+</div>
+<!-- Pre-expanded accordion -->
+<div class="accordion-content expanded" id="acc-interview">
+<div class="accordion-inner bg-surface-container border-x border-b border-outline-variant rounded-b -mt-1 pt-3 pb-3 px-3">
+<div class="flex items-center gap-2 mb-3 border-b border-outline-variant pb-2">
+<span class="font-caption text-caption text-error bg-error/10 px-1.5 py-0.5 rounded uppercase">High Leakage</span>
+<span class="font-caption text-caption text-on-surface-variant">Critical drop-off in technical phase.</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Reason 1 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between font-data-label text-data-label">
+<span class="text-on-surface text-[11px]">Failed Technical Task</span>
+<span class="text-secondary font-bold">68%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-lowest border border-outline-variant/50 rounded-sm overflow-hidden p-[1px]">
+<div class="h-full bg-secondary rounded-sm" style="width: 68%;"></div>
+</div>
+</div>
+<!-- Reason 2 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between font-data-label text-data-label">
+<span class="text-on-surface-variant text-[11px]">Salary Expectations</span>
+<span class="text-on-surface">22%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-lowest border border-outline-variant/50 rounded-sm overflow-hidden p-[1px]">
+<div class="h-full bg-surface-variant rounded-sm" style="width: 22%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 4: Offer -->
+<div class="group cursor-pointer" onclick="toggleAccordion('acc-offer')">
+<div class="relative h-12 w-full bg-surface-container-lowest border border-outline-variant rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-surface-container-highest border-r border-outline-variant funnel-bar-transition group-hover:bg-surface-variant" style="width: 12%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-data-label text-data-label text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                                Offer
+                            </span>
+<span class="font-data-display text-data-display text-on-surface">144</span>
+</div>
+</div>
+<div class="accordion-content" id="acc-offer">
+<div class="accordion-inner bg-surface-container border-x border-b border-outline-variant rounded-b -mt-1 pt-3 pb-2 px-3">
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-caption text-caption">
+<span class="text-on-surface-variant">Declined (Competitor)</span>
+<span class="text-on-surface">15%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-surface-variant" style="width: 15%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 5: Hired -->
+<div class="group">
+<div class="relative h-12 w-full bg-primary-fixed/5 border border-primary/30 rounded overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary/20 border-r border-primary/50 funnel-bar-transition" style="width: 5%;"></div>
+<div class="absolute inset-0 flex justify-between items-center px-3 z-10 pointer-events-none">
+<span class="font-data-label text-data-label text-primary-fixed uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Hired
+                            </span>
+<span class="font-data-display text-data-display text-primary-fixed">62</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom spacing -->
+<div class="h-12"></div>
+</main>
+</div>
+<script>
+        function toggleAccordion(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('expanded');
+            }
+        }
+    </script>
+</body></html>
